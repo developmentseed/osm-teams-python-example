@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>OSM Teams Python Example</title>
+    <meta name="description" content="A cool mapping.team integration">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href={{ url_for('static', filename="style.css")}}>
+    
+    <!-- import the webpage's client-side javascript file -->
+    <script src={{ url_for('static', filename="client.js")}} defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>
+        OSM Teams User Guide
+      </h1>
+
+    <main>
+      <p>
+        <strong>mapping.team</strong> is an index of OpenStreetMap teams. It allows other mappers to find their local communities, professional mappers to highlight the work they're doing,
+        and for OSM developers to integrate applications with one another. 
+      </p>
+      
+      <p>
+        At the core of <strong>mapping.team</strong> is an OAuth2 server that builds new capabilities on top of the OpenStreetMap login. As a developer of say, a tasking manager application, you can
+        connect to <strong>mapping.team</strong> and have users create, update and share teams made in your application with other applications in the ecosystem. This allows for teams and communities to
+        persist across different apps.
+      </p>
+      
+      <p>
+        This application is a barebones demonstration of how the <strong>mapping.team</strong> authentication and API work.
+      </p>
+      
+      <hr />
+      
+      {% if user %}
+      <section style="padding:30px; border: 2px solid red; margin:30px">
+        <h2>Welcome, {{ user }} !</h2>
+        <ul id="team-list"></ul>
+      </section>
+      {% else %}
+      <section style="padding:30px; border: 2px solid red; margin:30px">
+            <p class="bold">Oh hi,</p>
+            <a href="/login">Connect mapping.team :)</a>
+      </section>
+      {% endif %}
+    </main>
+
+    <footer>
+      Made by OpenStreetMap developers 🌍
+    </footer>
+
+    {% if user %}
+    <script>
+        const uid = "{{ uid }}"
+        const accessToken = "{{ access_token }}"
+        console.log(uid, accessToken)
+    </script>
+    {% else %}
+    <script></script>
+    {% endif %}
+  </body>
+</html>
+
